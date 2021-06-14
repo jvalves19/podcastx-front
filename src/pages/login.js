@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types';
 import axios from 'axios';
+import themeFile from '../util/theme';
 
 //Material-UI
 import withStyles from '@material-ui/core/styles/withStyles';
@@ -11,30 +12,7 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import CircularProgress from '@material-ui/core/CircularProgress';
 
-const styles = {
-    form: {
-        textAlign: 'center',
-    },
-    pageTitle: {
-        margin: '20px auto 20px auto'
-    },
-    textField:{
-        margin: '10px auto 10px auto'
-    },
-    button: {
-        marginTop: 10,
-        position: 'relative',
-    },
-    customError: {
-        color: 'red',
-        fontSize: '0.9rem',
-        marginTop: 10
-    },
-    progress: {
-        position: 'absolute',
-
-    }
-};
+const styles = (themeFile);
 
 class login extends Component {
     constructor(){
@@ -60,6 +38,9 @@ class login extends Component {
         axios
             .post('/login', userData)
             .then((res) => {
+                //Mantém o usuário logado mesmo após recarregar a página, através do Id (Token)
+                localStorage.setItem('FBIdToken', `Bearer ${res.data.token}`);
+                
                 this.setState({
                     loading: false
                 });
