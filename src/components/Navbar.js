@@ -7,6 +7,10 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Button from '@material-ui/core/Button';
 
 class Navbar extends Component {
+    Logout = () => {
+        alert('Logout');
+        this.props.logoutUser();
+    }
     render() {
         return (
             <AppBar position="fixed" >
@@ -14,6 +18,9 @@ class Navbar extends Component {
                     <Button color="inherit" component={Link} to="/"> Ínicio </Button>
                     <Button color="inherit" component={Link} to="/login"> Login </Button>
                     <Button color="inherit" component={Link} to="/signup"> Cadastro </Button>
+                    
+                    
+                    <Button color='secondary' onClick={this.Logout}> Sair </Button>
                 </Toolbar>
             </AppBar>
         )
