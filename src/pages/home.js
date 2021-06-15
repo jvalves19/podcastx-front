@@ -28,7 +28,7 @@ class home extends Component {
             this.state.screams.map(scream => <Scream key={scream.screamId} scream={scream}/> )
         ) : <p> Carregando ... </p>
         return (
-             <Grid container spacing={16}>
+             <Grid container>
                  <Grid item sm={8} xs={12}>
                     {recentScreamsMarkup}
                  </Grid>
