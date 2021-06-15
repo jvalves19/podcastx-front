@@ -7,9 +7,9 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Button from '@material-ui/core/Button';
 
 class Navbar extends Component {
-    Logout = () => {
+    Logout = (event) => {
         alert('Logout');
-        this.props.logoutUser();
+        localStorage.removeItem('FBIdToken');
     }
     render() {
         return (
@@ -20,7 +20,7 @@ class Navbar extends Component {
                     <Button color="inherit" component={Link} to="/signup"> Cadastro </Button>
                     
                     
-                    <Button color='secondary' onClick={this.Logout}> Sair </Button>
+                    <Button color='secondary'component={Link} to="/login" onClick={this.Logout}> Sair </Button>
                 </Toolbar>
             </AppBar>
         )
