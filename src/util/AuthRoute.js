@@ -1,14 +1,11 @@
 import React from 'react'
 import { Route, Redirect } from 'react-router-dom';
 
-const AuthRoute = ({ component: Component, authenticated, ...rest}) => (
+const AuthRoute = (props) => {
   // ? e : significam IfElse (if true (?) então <Redirect> Senão(:) <Component>)
-  <Route
-    {...rest}
-    render = { (props) => 
-      authenticated === true ? <Redirect to='/' /> : <Component {...props}/> 
-    }
-  />
-);
+  const authenticated = !!localStorage.getItem('FBIdToken')
+
+  return !(authenticated) ? <Route {...props} /> : <Redirect to='/' />
+};
 
 export default AuthRoute;
