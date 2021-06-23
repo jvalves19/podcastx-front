@@ -5,35 +5,36 @@ import axios from 'axios';
 import Grid from '@material-ui/core/Grid';
 
 //Components
-import Scream from '../components/Scream';
+import Podcast from '../components/Podcasts';
 
 class home extends Component {
     state = {
-        screams: null
+        podcasts: null
     }
     componentDidMount(){
-        axios.get('/screams')
-            .then(res => {
-                this.setState({
-                    screams: res.data
-                })
+        axios.get('/podcasts')
+        .then(res => {
+            this.setState({
+                podcasts: res.data
             })
-            .catch(err => {
-                console.log(err);
-            })
+        })
+        .catch(err => {
+            console.log(err);
+        })
     }
 
     render() {
-        let recentScreamsMarkup = this.state.screams ? (
-            this.state.screams.map(scream => <Scream key={scream.screamId} scream={scream}/> )
+        let recentePodcastsMarkup = this.state.podcasts ? (
+            this.state.podcasts.map(podcast => <Podcast key={podcast.podcastId} podcast={podcast}/> )
         ) : <p> Carregando ... </p>
+
         return (
              <Grid container>
-                 <Grid item sm={8} xs={12}>
-                    {recentScreamsMarkup}
+                 <Grid item sm={5} xs={12}>
+                    {recentePodcastsMarkup}
                  </Grid>
-                 <Grid item sm={4} xs={12}>
-
+                 <Grid item sm={5} xs={8}>
+                    <p> Categorias ... </p>
                  </Grid>
              </Grid>
         );
