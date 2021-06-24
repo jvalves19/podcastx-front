@@ -28,12 +28,10 @@ const styles = {
 
 class Scream extends Component {
   render() {
-    dayjs.extend(relativeTime);
-
     const { 
       classes, 
       scream : { 
-        body, createdAt, userImage, userHandle, screamId, likeCount 
+        body, userImage, userHandle
       } 
     } = this.props;
 
@@ -47,9 +45,6 @@ class Scream extends Component {
         <CardContent className={classes.content}>
           <Typography variant='h5' component={Link} to={`/users/${userHandle}`} color='primary'> 
             {userHandle} 
-          </Typography>
-          <Typography variant='body2' color='secondary'> 
-            {dayjs(createdAt).fromNow()} 
           </Typography>
           <Typography variant='body1'> 
             {body} 

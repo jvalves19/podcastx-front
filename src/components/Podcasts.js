@@ -18,6 +18,8 @@ import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import Button from '@material-ui/core/Button';
 
+import { Howl } from 'howler';
+
 const styles = {
   root: {
     display: 'flex',
@@ -49,18 +51,39 @@ const styles = {
   btn: {
     marginBottom: 10,
     marginRight: 5
-  }
-  
+  }  
 }
 
+const audioClips = [
+  {sound: "https://firebasestorage.googleapis.com/v0/b/podcastx-tcc.appspot.com/o/Cornerstone.mp3?alt=media", label: "Cornerstone"}
+]
+
 class Podcasts extends Component {
+  soundPlay = (src) => {
+    const sound = new Howl({
+      src,
+      html5: true,
+    })
+    sound.play();
+  }
+  renderButtonSound = () => {
+    return audioClips.map((soundObj, index) => {
+      return (
+        <IconButton aria-label="play/pause" onClick={() => this.soundPlay(soundObj.sound)}>
+          <PlayArrowIcon>
+          </PlayArrowIcon>
+        </IconButton>
+      )
+    })
+  }
+
   render() {
     dayjs.extend(relativeTime);
 
     const { 
       classes, 
       podcast : { 
-        body, createdAt, userImage, userHandle, podcastName, podcastId, likeCount
+        podcastUrl, createdAt, userImage, userHandle, podcastName, likeCount
       } 
     } = this.props;
 
@@ -80,9 +103,9 @@ class Podcasts extends Component {
           <IconButton aria-label="previous">
             {'spacing{1}' === 'rtl' ? <SkipNextIcon /> : <SkipPreviousIcon />}
           </IconButton>
-          <IconButton aria-label="play/pause">
-            <PlayArrowIcon className={classes.playIcon} />
-          </IconButton>
+          
+            {this.renderButtonSound()}
+
           <IconButton aria-label="next">
             {'spacing{1}' === 'rtl' ? <SkipPreviousIcon /> : <SkipNextIcon />}
           </IconButton>
@@ -95,9 +118,6 @@ class Podcasts extends Component {
             </Button>
             {'Postado ' + dayjs(createdAt).fromNow()} 
         </Typography>
-          
-
-        
       </div>
       <CardMedia 
         className={classes.cover}
