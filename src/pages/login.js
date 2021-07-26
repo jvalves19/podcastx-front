@@ -38,9 +38,9 @@ class login extends Component {
         axios
             .post('/login', userData)
             .then((res) => {
+                window.location.reload();
                 //Mantém o usuário logado mesmo após recarregar a página, através do Id (Token)
                 localStorage.setItem('FBIdToken', `Bearer ${res.data.token}`);
-                
                 this.setState({
                     loading: false
                 });

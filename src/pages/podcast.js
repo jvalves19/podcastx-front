@@ -25,7 +25,6 @@ class podcast extends Component {
         podcastUrl: '',
         podcastName: '',
         loading: false,
-        errors: {}
     };
   }
 
@@ -52,7 +51,6 @@ class podcast extends Component {
         })
         .catch((err) => {
             this.setState({
-                errors: err.response.data,
                 loading: false
             });
         });
@@ -66,7 +64,7 @@ class podcast extends Component {
 
   render() {
     const { classes } = this.props;
-    const { errors, loading } = this.state;
+    const { loading } = this.state;
 
     return (
       <Grid container className={classes.form}>

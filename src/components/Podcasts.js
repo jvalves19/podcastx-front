@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
+import { Link } from 'react-router-dom';
 
 //Material-UI
 import withStyles from '@material-ui/core/styles/withStyles';
@@ -14,11 +15,10 @@ import SkipPreviousIcon from '@material-ui/icons/SkipPrevious';
 import CardMedia from '@material-ui/core/CardMedia';
 import SkipNextIcon from '@material-ui/icons/SkipNext';
 import PlayArrowIcon from '@material-ui/icons/PlayArrow';
+import PauseIcon from '@material-ui/icons/Pause';
 
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import Button from '@material-ui/core/Button';
-
-import { Howl } from 'howler';
 
 const styles = {
   root: {
@@ -53,28 +53,30 @@ const styles = {
     marginRight: 5
   }  
 }
-
-const audioClips = [
-  {sound: "https://firebasestorage.googleapis.com/v0/b/podcastx-tcc.appspot.com/o/Cornerstone.mp3?alt=media", label: "Cornerstone"}
-]
-
+ 
 class Podcasts extends Component {
-  soundPlay = (src) => {
-    const sound = new Howl({
-      src,
-      html5: true,
-    })
-    sound.play();
+  constructor(){
+    super();    
+    this.state = {
+      playing: false,
+    };
+    this.audio = new Audio(
+      'https://firebasestorage.googleapis.com/v0/b/podcastx-tcc.appspot.com/o/Cornerstone.mp3?alt=media'
+    )
   }
-  renderButtonSound = () => {
-    return audioClips.map((soundObj, index) => {
-      return (
-        <IconButton aria-label="play/pause" onClick={() => this.soundPlay(soundObj.sound)}>
-          <PlayArrowIcon>
-          </PlayArrowIcon>
-        </IconButton>
-      )
+
+  soundPlay = () => {
+    this.setState({
+      playing: true
     })
+    this.audio.play();
+  }
+
+  soundStop = () => {
+    this.setState({
+      playing: false
+    });
+    this.audio.pause();  
   }
 
   render() {
@@ -86,6 +88,7 @@ class Podcasts extends Component {
         podcastUrl, createdAt, userImage, userHandle, podcastName, likeCount
       } 
     } = this.props;
+    const { playing } = this.state;
 
     return (
       <Card className={classes.root}>
@@ -94,7 +97,7 @@ class Podcasts extends Component {
           <Typography component="h5" variant="h5">
             {podcastName}
           </Typography>
-          <Typography variant="subtitle1" color="textSecondary">
+          <Typography variant="subtitle1" component={Link} to={`/users/${userHandle}`} color="textSecondary">
             @{userHandle}
           </Typography>
           
@@ -103,8 +106,16 @@ class Podcasts extends Component {
           <IconButton aria-label="previous">
             {'spacing{1}' === 'rtl' ? <SkipNextIcon /> : <SkipPreviousIcon />}
           </IconButton>
-          
-            {this.renderButtonSound()}
+
+            { playing ? 
+              <IconButton aria-label="play/pause" onClick={() => this.soundStop()}>
+                <PauseIcon />
+              </IconButton> 
+                : 
+              <IconButton aria-label="play/pause" onClick={() => this.soundPlay()}>
+                <PlayArrowIcon />
+              </IconButton> 
+            }  
 
           <IconButton aria-label="next">
             {'spacing{1}' === 'rtl' ? <SkipPreviousIcon /> : <SkipNextIcon />}
@@ -115,8 +126,10 @@ class Podcasts extends Component {
         <Typography variant="subtitle1" color="textSecondary" className={classes.info}>
             <Button className={classes.btn}>
               <FavoriteBorderIcon color='primary' />
+              { likeCount }
             </Button>
-            {'Postado ' + dayjs(createdAt).fromNow()} 
+            {'Posted ' + dayjs(createdAt).fromNow()} 
+            
         </Typography>
       </div>
       <CardMedia 

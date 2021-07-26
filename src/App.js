@@ -11,6 +11,7 @@ import createMuiTheme from '@material-ui/core/styles/createMuiTheme';
 //Components
 import Navbar from './components/Navbar';
 import AuthRoute from './util/AuthRoute';
+//import PrivateRoute from '.util/PrivateRoute';
 
 //Pages
 import home from './pages/home';
