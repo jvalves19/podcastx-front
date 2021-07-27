@@ -11,7 +11,7 @@ import createMuiTheme from '@material-ui/core/styles/createMuiTheme';
 //Components
 import Navbar from './components/Navbar';
 import AuthRoute from './util/AuthRoute';
-//import PrivateRoute from '.util/PrivateRoute';
+import PrivateRoute from './util/PrivateRoute';
 
 //Pages
 import home from './pages/home';
@@ -50,8 +50,8 @@ class App extends Component {
                 <Route exact path='/' component={home} />
                 <AuthRoute exact path='/login' component={login} authenticated={authenticated} />
                 <AuthRoute exact path='/signup' component={signup} authenticated={authenticated} />
-                <Route exact path='/podcast' component={podcast} authenticated={authenticated} />
-                <Route exact path='/profile' component={profile} authenticated={authenticated} />
+                <PrivateRoute exact path='/podcast' component={podcast} authenticated={authenticated} />
+                <PrivateRoute exact path='/profile' component={profile} authenticated={authenticated} />
               </Switch>
             </div>
           </Router>

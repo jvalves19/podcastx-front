@@ -8,14 +8,18 @@ import Grid from '@material-ui/core/Grid';
 import Podcast from '../components/Podcasts';
 
 class home extends Component {
-    state = {
-        podcasts: null
+    constructor(){
+        super()
+        this.state = {
+            podcasts: null
+        }
     }
+    
     componentDidMount(){
         axios.get('/podcasts')
-        .then(res => {
+        .then(podcast => {
             this.setState({
-                podcasts: res.data
+                podcasts: podcast.data
             })
         })
         .catch(err => {
