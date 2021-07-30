@@ -1,14 +1,13 @@
 import React, { Component } from 'react'
-//import axios from 'axios';
+
+import Profile from '../components/Profile';
 
 class profile extends Component {
 
 render() {
 
     return (
-      <div>
-        
-      </div>
+      <Profile />
     );
   }
 }
