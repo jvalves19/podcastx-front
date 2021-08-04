@@ -29,6 +29,11 @@ export default {
       marginTop: 10,
       position: 'relative',
   },
+  editButton:{
+    position: 'absolute',
+    float: 'left',
+    paddingBottom: 10
+  },
   customError: {
       color: 'red',
       fontSize: '0.9rem',

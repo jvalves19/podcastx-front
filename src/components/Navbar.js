@@ -31,22 +31,20 @@ class Navbar extends Component {
 
         return (
             <AppBar position="fixed" >
-
-                    { authenticated ?                     
-                        <Toolbar className="nav-container">
-                            <Button color="inherit" component={Link} to="/"> Ínicio </Button>
-                            <Button color="inherit" component={Link} to="/profile"> Perfil </Button>                        
-                            <Button color="inherit" component={Link} to="/podcast"> Podcastizar </Button>
-                            <Button color='secondary'component={Link} to="/login" onClick={this.Logout}> Sair </Button>
-                        </Toolbar>
-                            : 
-                        <Toolbar className="nav-container">
-                            <Button color="inherit" component={Link} to="/"> Ínicio </Button>
-                            <Button color="inherit" component={Link} to="/login"> Login </Button>
-                            <Button color="inherit" component={Link} to="/signup"> Cadastro </Button> 
-                        </Toolbar>                    
-                    }
-                
+                { authenticated ?                     
+                    <Toolbar className="nav-container">
+                        <Button color="inherit" component={Link} to="/"> Ínicio </Button>
+                        <Button color="inherit" component={Link} to="/profile"> Perfil </Button>                        
+                        <Button color="inherit" component={Link} to="/podcast"> Podcastizar </Button>
+                        <Button color='secondary'component={Link} to="/login" onClick={this.Logout}> Sair </Button>
+                    </Toolbar>
+                        : 
+                    <Toolbar className="nav-container">
+                        <Button color="inherit" component={Link} to="/"> Ínicio </Button>
+                        <Button color="inherit" component={Link} to="/login"> Login </Button>
+                        <Button color="inherit" component={Link} to="/signup"> Cadastro </Button> 
+                    </Toolbar>                    
+                }                
             </AppBar>
         )
     }

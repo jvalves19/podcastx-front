@@ -1,8 +1,8 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types';
+import withStyles from '@material-ui/core/styles/withStyles';
 import { Link } from 'react-router-dom';
 import dayjs from 'dayjs';
-import withStyles from '@material-ui/core/styles/withStyles';
 
 //Redux
 import { connect } from 'react-redux';
@@ -14,15 +14,17 @@ import MULink from '@material-ui/core/Link'
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import Tooltip from '@material-ui/core/Tooltip'; 
+import EditDetails from './EditDetails';
 
 //Icones
 import CalendarToday from '@material-ui/icons/CalendarToday';
 import EditIcon from '@material-ui/icons/Edit';
+import LinkIcon from '@material-ui/icons/Link';
 
 //Styles (estilo retirado do site: https://pastebin.com/1mUGTNsh)
 const styles = (theme) => ({
   paper: {
-    padding: 20
+    padding: '40px 0 60px 20px'
   },
   profile: {
     '& .image-wrapper': {
@@ -30,8 +32,8 @@ const styles = (theme) => ({
       position: 'relative',
       '& button': {
         position: 'absolute',
-        top: '80%',
-        left: '70%'
+        top: '100%',
+        left: '80%'
       }
     },
     '& .profile-image': {
@@ -61,7 +63,7 @@ const styles = (theme) => ({
     }
   },
   button: {
-      marginTop: '130px',
+      paddingLeft: 10,
       position: 'absolute',
   }
 });
@@ -106,19 +108,34 @@ class Profile extends Component {
             </Tooltip>
           </div>
           <hr />
+
           <div className='profile-detals'>
             <MULink component={Link} to={`/users/${handle}`} color='primary' variant='h5'>
               @{handle}
             </MULink>
             <hr />
-            {bio && <Typography variant='body2'> {bio} </Typography>}
+
+            {bio && <Typography variant='h5'> {bio} </Typography>}
             <hr />
+
+            {website && (
+              <Fragment>
+                <LinkIcon color='primary' />
+                <a href={website} target='_blank' rel='noopener noreferrer'>
+                  {' '}{website}
+                </a>
+              </Fragment>
+            )}
+            <hr />
+
             <CalendarToday color='primary'/> {' '}
             <span>
               Membro desde: {dayjs(createdAt).format('MMM YYYY')}
-            </span>
-            
+            </span>                 
           </div>
+          
+          <hr /> 
+          <EditDetails />
         </div>
       </Paper>
     ) : (
