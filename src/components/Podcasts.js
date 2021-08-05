@@ -2,6 +2,11 @@ import React, { Component } from 'react'
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
+
+//Redux
+import { connect } from 'react-redux';
+import { likePodcast, unlikePodcast } from '../redux/actions/dataActions'; 
 
 //Material-UI
 import withStyles from '@material-ui/core/styles/withStyles';
@@ -18,6 +23,7 @@ import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 import PauseIcon from '@material-ui/icons/Pause';
 
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
+import FavoriteIcon from '@material-ui/icons/Favorite';
 import Button from '@material-ui/core/Button';
 
 const styles = {
@@ -79,14 +85,30 @@ class Podcasts extends Component {
     this.audio.pause();  
   }
 
+  likedPodcast = () => {
+    if(this.props.user.likes && this.props.user.likes.find(like => like.podcastId === this.props.podcast.podcastId)){
+      return true;
+    }
+    else { 
+      return false;
+    }
+  };
+
+  likePodcast = () => {
+    this.props.likePodcast(this.props.podcast.podcastId);
+  }
+  unlikePodcast = () => {
+    this.props.unlikePodcast(this.props.podcast.podcastId);
+  }
   render() {
     dayjs.extend(relativeTime);
 
     const { 
       classes, 
       podcast : { 
-        podcastUrl, createdAt, userImage, userHandle, podcastName, likeCount
-      } 
+        podcastId, podcastUrl, createdAt, userImage, userHandle, podcastName, likeCount
+      }, 
+      user: { authenticated }
     } = this.props;
     const { playing } = this.state;
 
@@ -124,10 +146,26 @@ class Podcasts extends Component {
         </div>
         
         <Typography variant="subtitle1" color="textSecondary" className={classes.info}>
-            <Button className={classes.btn}>
-              <FavoriteBorderIcon color='primary' />
-              { likeCount }
-            </Button>
+            { !authenticated ? (
+                <Button className={classes.btn}>
+                  <Link to='/login'>
+                    <FavoriteBorderIcon color='primary' />
+                  </Link>
+                  { likeCount }
+                </Button> ) : (
+                  this.likedPodcast() ? (
+                    <Button className={classes.btn} onClick={this.unlikePodcast}>
+                      <FavoriteIcon color='primary' />
+                      { likeCount }
+                    </Button>
+                  ) : (
+                    <Button className={classes.btn} onClick={this.likePodcast}>
+                      <FavoriteBorderIcon color='primary' />
+                      { likeCount }
+                    </Button>
+                  )
+                )
+            }
             {'Posted ' + dayjs(createdAt).fromNow()} 
             
         </Typography>
@@ -142,4 +180,21 @@ class Podcasts extends Component {
   }
 }
 
-export default withStyles(styles)(Podcasts);
+Podcasts.propTypes = {
+  likePodcast: PropTypes.func.isRequired,
+  unlikePodcast: PropTypes.func.isRequired,
+  user: PropTypes.object.isRequired,
+  podcast: PropTypes.object.isRequired,
+  classes: PropTypes.object.isRequired
+}
+
+const mapStateToProps = (state) => ({
+  user: state.user,
+})
+
+const mapActionsToProps = {
+  likePodcast,
+  unlikePodcast
+}
+
+export default connect(mapStateToProps, mapActionsToProps)(withStyles(styles)(Podcasts));

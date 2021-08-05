@@ -5,6 +5,9 @@ import { Link } from 'react-router-dom';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Button from '@material-ui/core/Button';
+import NotificationsIcon from '@material-ui/icons/Notifications';
+import Tooltip from '@material-ui/core/Tooltip';
+import IconButton from '@material-ui/core/IconButton';
 
 class Navbar extends Component {    
     constructor(){
@@ -27,7 +30,7 @@ class Navbar extends Component {
         })
     }
     render() {
-        const { authenticated} = this.state;
+        const { authenticated } = this.state;
 
         return (
             <AppBar position="fixed" >
@@ -36,6 +39,11 @@ class Navbar extends Component {
                         <Button color="inherit" component={Link} to="/"> Ínicio </Button>
                         <Button color="inherit" component={Link} to="/profile"> Perfil </Button>                        
                         <Button color="inherit" component={Link} to="/podcast"> Podcastizar </Button>
+                        <Tooltip title='Notificações' placement='top'>
+                            <IconButton onClick={this.seeNotification} color='default' >
+                                <NotificationsIcon></NotificationsIcon>
+                            </IconButton>
+                        </Tooltip>
                         <Button color='secondary'component={Link} to="/login" onClick={this.Logout}> Sair </Button>
                     </Toolbar>
                         : 

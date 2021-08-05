@@ -1,5 +1,9 @@
 import React, { Component } from 'react'
-import axios from 'axios';
+import PropTypes from 'prop-types';
+
+//Redux
+import { connect } from 'react-redux';
+import { getPodcasts } from '../redux/actions/dataActions';
 
 //Material-UI
 import Grid from '@material-ui/core/Grid';
@@ -8,29 +12,16 @@ import Grid from '@material-ui/core/Grid';
 import Podcast from '../components/Podcasts';
 
 class home extends Component {
-    constructor(){
-        super()
-        this.state = {
-            podcasts: null
-        }
-    }
-    
     componentDidMount(){
-        axios.get('/podcasts')
-        .then(podcast => {
-            this.setState({
-                podcasts: podcast.data
-            })
-        })
-        .catch(err => {
-            console.log(err);
-        })
+        this.props.getPodcasts();
     }
 
     render() {
-        let recentePodcastsMarkup = this.state.podcasts ? (
-            this.state.podcasts.map(podcast => <Podcast key={podcast.podcastId} podcast={podcast}/> )
-        ) : <p> Carregando ... </p>
+        const { podcasts, loading } = this.props.data;
+
+        let recentePodcastsMarkup = !loading ? (
+            podcasts.map((podcast) => <Podcast key={podcast.podcastId} podcast={podcast}/>)
+        ) : (<p> Carregando ... </p>);
 
         return (
              <Grid container>
@@ -45,4 +36,14 @@ class home extends Component {
     }
 }
 
-export default home;
+home.propTypes = {
+    getPodcasts: PropTypes.func.isRequired,
+    data: PropTypes.object.isRequired,
+}
+
+//data = dados do podcast
+const mapStateToProps = (state) => ({
+    data: state.data
+})
+
+export default connect(mapStateToProps, { getPodcasts })(home);

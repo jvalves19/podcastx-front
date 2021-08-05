@@ -9,4 +9,9 @@ export const LOADING_UI = 'LOADING_UI'
 export const SET_ERRORS = 'SET_ERRORS'
 export const CLEAR_ERRORS = 'CLEAR_ERRORS'
 
-//Data Reducer Types
+//Podcast Reducer Types
+export const LOADING_PODCAST = 'LOADING_PODCAST'
+export const SET_PODCASTS = 'SET_PODCASTS'
+export const SET_PODCAST = 'SET_PODCAST'
+export const LIKE_PODCAST = 'LIKE_PODCAST'
+export const UNLIKE_PODCAST = 'UNLIKE_PODCAST'

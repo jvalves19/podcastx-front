@@ -18,7 +18,7 @@ import EditDetails from './EditDetails';
 
 //Icones
 import CalendarToday from '@material-ui/icons/CalendarToday';
-import EditIcon from '@material-ui/icons/Edit';
+import AddAPhotoIcon from '@material-ui/icons/AddAPhoto';
 import LinkIcon from '@material-ui/icons/Link';
 
 //Styles (estilo retirado do site: https://pastebin.com/1mUGTNsh)
@@ -103,7 +103,7 @@ class Profile extends Component {
             <input type='file' id='imageInput' hidden='hidden' onChange={this.changeImage} />
             <Tooltip title='Alterar Imagem' placement='top'>
               <IconButton onClick={this.editImage} className={classes.button}>
-                <EditIcon color='primary' />
+                <AddAPhotoIcon color='primary' />
               </IconButton>
             </Tooltip>
           </div>
