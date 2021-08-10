@@ -1,0 +1,41 @@
+.header{
+    width: 100%;
+    height: 80px;
+    background-color: var(--fourth-color-dark);
+    border-bottom: 3px solid var(--fourth-color-dark);
+    position: fixed;
+}
+
+.botoes, .cadastro{
+  width: 8%;
+  margin: 0;
+  background-color: inherit;
+  font-size: larger;
+  border: 0;
+  padding: 0;
+  min-width: 110px;
+  cursor: pointer;
+  box-sizing: border-box
+}
+
+.nav-container{
+  height: 100%;
+  text-align: right;
+  font-size: large;
+  padding: 0; 
+  box-sizing: content-box;
+  min-width: max-content;
+  color: var(--fifith-color-xlight);
+}
+
+.botoes{
+    height: inherit;
+    border-bottom: 3px solid var(--fifith-color-xlight);
+}
+
+.cadastro{
+  height: 50px;
+  border: 2px solid var(--fifith-color-xlight);
+  border-radius: 50px;
+  margin-left: 12px;
+}

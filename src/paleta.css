@@ -1,0 +1,72 @@
+:root {
+  --menu-itens-hover: #b1babe;
+
+  /*Cores principais*/
+  --main-color: #474073;
+  --second-color: #2e4159;
+  --third-color: #4f4d8c;
+  --fourth-color: #3f3f3f;
+  --fifith-color: #8f8ebf;
+
+  /*Dark version*/
+  --main-color-dark: #1b1947;
+  --secondary-color-dark: #031b30;
+  --third-color-dark: #20255e;
+  --fourth-color-dark: #191919;
+  --fifith-color-dark: #60618f;
+
+  /*X-Dark version*/
+  --main-color-xdark: #000021;
+  --secondary-color-xdark: #010b02;
+  --third-color-xdark: #000034;
+  --fourth-color-xdark: #000000;
+  --fifith-color-xdark: #343761;
+
+  /*light version*/
+  --main-color-light: #746ba2;
+  --secondary-color-light: #596c86;
+  --third-color-light: #7e79bc;
+  --fourth-color-light: #6a6a6a;
+  --fifith-color-light: #cccaff;
+
+  /*X-light version*/
+  --main-color-xlight: #a499d3;
+  --secondary-color-xlight: #879ab6;
+  --third-color-xlight: #afa8ef;
+  --fourth-color-xlight: #989898;
+  --fifith-color-xlight: #eae6ff;
+
+  /*Transparencia 90%*/
+  --main-color-transparent-90: #4740731a;
+  --second-color-transparent-90: #2d40581a;
+  --third-color-transparent-90: #504e8d1a;
+  --fourth-color-transparent-90: #4040401a;
+  --fifith-color-transparent-90: #8e8dbf1a;
+
+  /*Transparencia 60%*/
+  --main-color-transparent-60: #47407366;
+  --second-color-transparent-60: #2e415966;
+  --third-color-transparent-60: #4f4d8c66;
+  --fourth-color-transparent-60: #3f3f3f66;
+  --fifith-color-transparent-60: #8f8ebf66;
+
+  /*Transparencia 30%*/
+  --main-color-transparent-30: #474073b3;
+  --second-color-transparent-30: #2e4159b3;
+  --third-color-transparent-30: #4f4d8cb3;
+  --fourth-color-transparent-30: #3f3f3fb3;
+  --fifith-color-transparent-30: #8f8ebfb3;
+
+  /*Transparencia 10%*/
+  --main-color-transparent-10: #474073e6;
+  --second-color-transparent-10: #2e4159e6;
+  --third-color-transparent-10: #4f4d8ce6;
+  --fourth-color-transparent-10: #3f3f3fe6;
+  --fifith-color-transparent-10: #8f8ebfe6;
+
+  --fifith-color-xlight-transp: #eae6ffa6;
+}
+
+body {
+  font-family: "Noto Sans SC", sans-serif;
+}

@@ -23,7 +23,6 @@ class Navbar extends Component {
         }
     }
     Logout = (event) => {
-        alert('Logout');
         localStorage.removeItem('FBIdToken');
         this.setState({
             authenticated: false
