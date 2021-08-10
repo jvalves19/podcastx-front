@@ -1,13 +1,14 @@
 import React, { Component } from 'react'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import themeFile from './util/theme';
+import './paleta.css';
 import './App.css';
+import themeFile from './util/theme';
 import jwtDecode from 'jwt-decode';
 import axios from 'axios';
 
 //Redux
-import { Provider } from 'react-redux';
 import store from './redux/store';
+import { Provider } from 'react-redux';
 import { SET_AUTHENTICATED } from './redux/types'; 
 import { logoutUser, getUserData } from './redux/actions/userActions';
 
@@ -26,6 +27,7 @@ import login from './pages/login';
 import signup from './pages/signup';
 import podcast from './pages/podcast';
 import profile from './pages/profile';
+import user from './pages/user';
 
 const theme = createMuiTheme(themeFile);
 
@@ -59,6 +61,7 @@ class App extends Component {
                 <AuthRoute exact path='/signup' component={signup} />
                 <PrivateRoute exact path='/podcast' component={podcast} />
                 <PrivateRoute exact path='/profile' component={profile} />
+                <Route exact path='/users/:handle' component={user} />
               </Switch>
             </div>
           </Router>          

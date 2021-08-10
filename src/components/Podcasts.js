@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 
 //Redux
 import { connect } from 'react-redux';
-import { likePodcast, unlikePodcast } from '../redux/actions/dataActions'; 
+import { likePodcast, unlikePodcast, getPodcast } from '../redux/actions/dataActions'; 
 
 //Material-UI
 import withStyles from '@material-ui/core/styles/withStyles';
@@ -75,6 +75,7 @@ class Podcasts extends Component {
     this.setState({
       playing: true
     })
+    //this.props.getPodcast(this.props.podcastId)
     this.audio.play();
   }
 
@@ -106,9 +107,9 @@ class Podcasts extends Component {
     const { 
       classes, 
       podcast : { 
-        podcastId, podcastUrl, createdAt, userImage, userHandle, podcastName, likeCount
+        podcastId, podcastUrl, podcastName, createdAt, userImage, userHandle, likeCount
       }, 
-      user: { authenticated }
+      user: { authenticated },
     } = this.props;
     const { playing } = this.state;
 
@@ -181,6 +182,8 @@ class Podcasts extends Component {
 }
 
 Podcasts.propTypes = {
+  //podcastId: PropTypes.string.isRequired,
+  getPodcast: PropTypes.func.isRequired,
   likePodcast: PropTypes.func.isRequired,
   unlikePodcast: PropTypes.func.isRequired,
   user: PropTypes.object.isRequired,
@@ -193,6 +196,7 @@ const mapStateToProps = (state) => ({
 })
 
 const mapActionsToProps = {
+  getPodcast,
   likePodcast,
   unlikePodcast
 }

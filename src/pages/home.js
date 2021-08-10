@@ -7,7 +7,6 @@ import { getPodcasts } from '../redux/actions/dataActions';
 
 //Material-UI
 import Grid from '@material-ui/core/Grid';
-
 //Components
 import Podcast from '../components/Podcasts';
 
@@ -20,7 +19,7 @@ class home extends Component {
         const { podcasts, loading } = this.props.data;
 
         let recentePodcastsMarkup = !loading ? (
-            podcasts.map((podcast) => <Podcast key={podcast.podcastId} podcast={podcast}/>)
+            podcasts.map((podcast) => <Podcast key={podcast.podcastId} podcast={podcast} />)
         ) : (<p> Carregando ... </p>);
 
         return (

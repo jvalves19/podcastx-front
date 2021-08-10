@@ -10,7 +10,7 @@ import { logoutUser, uploadImage } from '../redux/actions/userActions';
 
 //Material UI
 import Paper from '@material-ui/core/Paper';
-import MULink from '@material-ui/core/Link'
+import MuiLink from '@material-ui/core/Link'
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import Tooltip from '@material-ui/core/Tooltip'; 
@@ -88,7 +88,7 @@ class Profile extends Component {
       classes,
       user : { 
         credentials: {
-          handle, imageUrl, bio, website, location, createdAt
+          handle, imageUrl, bio, website, createdAt
         },
         loading,
         authenticated
@@ -110,9 +110,9 @@ class Profile extends Component {
           <hr />
 
           <div className='profile-detals'>
-            <MULink component={Link} to={`/users/${handle}`} color='primary' variant='h5'>
+            <MuiLink component={Link} to={`/users/${handle}`} color='primary' variant='h5'>
               @{handle}
-            </MULink>
+            </MuiLink>
             <hr />
 
             {bio && <Typography variant='h5'> {bio} </Typography>}
@@ -123,7 +123,7 @@ class Profile extends Component {
                 <LinkIcon color='primary' />
                 <a href={website} target='_blank' rel='noopener noreferrer'>
                   {' '}{website}
-                </a>
+                </a>           
               </Fragment>
             )}
             <hr />

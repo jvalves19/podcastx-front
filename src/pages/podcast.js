@@ -1,129 +1,120 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types';
-import axios from 'axios';
+import withStyles from '@material-ui/core/styles/withStyles';
 import themeFile from '../util/theme';
 
-//Material-UI
-import withStyles from '@material-ui/core/styles/withStyles';
-import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
+//Redux
+import { connect } from 'react-redux';
+import { postPodcast } from '../redux/actions/dataActions';
 
-import TextField from '@material-ui/core/TextField';
+import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogTitle from '@material-ui/core/DialogTitle';
 import CircularProgress from '@material-ui/core/CircularProgress';
 
-import IconButton from '@material-ui/core/IconButton';
+import Grid from '@material-ui/core/Grid';
+
 import AudiotrackIcon from '@material-ui/icons/Audiotrack';
 import Tooltip from '@material-ui/core/Tooltip';
 
 const styles = (themeFile);
 
 class podcast extends Component { 
-  constructor(){
-    super();
-    this.state = {
-        podcastUrl: '',
-        podcastName: '',
-        loading: false,
-    };
-  }
+  state = {
+    podcastUrl: '',
+    podcastName: '',
+    errors: {}
+  };
 
+  componentWillReceiveProps(nextProps){
+    if(nextProps.UI.errors){
+      this.setState({ errors: nextProps.UI.errors })
+    }
+  }
+  
   handleSubmit = (event) => {
     event.preventDefault();
-    this.setState({
-        loading: true
-    });
 
-    const newPodcastData = {
-        podcastUrl: this.state.podcastUrl,
-        podcastName: this.state.podcastName
+    const newPodcast = {
+      podcastUrl: this.state.podcastUrl,
+      podcastName: this.state.podcastName
     };
-    axios
-        .post('/podcast', newPodcastData)
-        .then((res) => {
-            //Mantém o usuário logado mesmo após recarregar a página, através do Id (Token)
-            localStorage.setItem('FBIdToken', `Bearer ${res.data.token}`);
-
-            this.setState({
-                loading: false
-            });
-            this.props.history.push('/');
-        })
-        .catch((err) => {
-            this.setState({
-                loading: false
-            });
-        });
+    this.props.postPodcast(newPodcast, this.props.history);
   };
-
   handleChange = (event) => {
-    this.setState({
-        [event.target.name]: event.target.value
-    });
-  };
+    this.setState({ 
+      [event.target.name]: event.target.value 
+    })
+  }
 
   render() {
-    const { classes } = this.props;
-    const { loading } = this.state;
+    const { errors } = this.state;
+    const { classes, UI: { loading }} = this.props;
 
     return (
-      <Grid container className={classes.form}>
-        <Grid item sm />
-        <Grid item sm > 
-          <Typography variant='h4' className={classes.pageTitle}>
-              Publique seu Podex
-          </Typography>
-          <form noValidate onSubmit={this.handleSubmit}>
+      <Grid>
+        <Fragment>       
+          <DialogTitle> Publique aqui o seu PODEX </DialogTitle>
+          <DialogContent>
+            <form onSubmit={this.handleSubmit}>
               <TextField 
                 id='podcastUrl'
                 name='podcastUrl'
                 type='text'
-                label='Url do Podcast'
-                className={classes.TextField}
-                value={this.state.handle}
+                label='Podex'
+                placeholder='Link do PODCAST'
+                className={classes.textField}
+                helperText={errors.handle}
+                error={errors.handle ? true : false}
                 onChange={this.handleChange}
-                fullWidth
+                fullWidth 
               />
-
               <TextField 
                 id='podcastName'
-                name='podcastName'
+                name='podcastNome'
                 type='text'
-                label='Nome do Podcast'
-                className={classes.TextField}
-                value={this.state.handle}
+                label='Nome do Podex'
+                placeholder='Nome do PODCAST'
+                className={classes.textField}
+                helperText={errors.handle}
+                error={errors.handle ? true : false}
                 onChange={this.handleChange}
-                fullWidth
-              />
-              
-              <input 
-                type='file' 
-                id='audioInput' 
-                hidden='hidden'
-                onChange={this.handleAudioChange}
-              />
-              <Tooltip title='Insera Aqui seu Podex' placement='top'>
-                <IconButton onClick={this.handleEditAudio} className='button'>
-                  <AudiotrackIcon color='primary' />
-                </IconButton>
-              </Tooltip>
-              
-              <Button type='submit' variant='outlined' color='primary' className={classes.button} disabled={loading}>
-                  Publicar
-                  {loading && (
-                      <CircularProgress size={30} className={classes.progress} />
-                  )}
+                fullWidth 
+              />                 
+              <Button 
+                type='submit' 
+                variant='outlined' 
+                color='primary' 
+                className={classes.button} 
+                disabled={loading} 
+              >
+              {errors.general && (
+                <Typography variant='body2' className={classes.customError}>
+                    {errors.general}
+                </Typography>
+              )}
+                <Tooltip title='Insira seu Podcast Aqui' placement='top'>
+                  <AudiotrackIcon />
+                </Tooltip> 
+                Podcastizar
+                {loading && ( <CircularProgress size={30} className={classes.progress} />)}
               </Button>
-          </form>
-        </Grid>
-        <Grid item sm />
+            </form>
+          </DialogContent>
+        </Fragment>
       </Grid>
     )
   }
 }
 
 podcast.propTypes = {
-  classes: PropTypes.object.isRequired
-}
+  UI: PropTypes.object.isRequired,
+  postPodcast: PropTypes.func.isRequired,
+};
+const mapStateToProps = (state) => ({
+  UI: state.UI
+})
 
-export default withStyles(styles)(podcast);
+export default connect(mapStateToProps, { postPodcast })(withStyles(styles)(podcast));
