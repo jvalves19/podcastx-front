@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 
 //Redux
 import { connect } from 'react-redux';
-import { likePodcast, unlikePodcast, getPodcast } from '../redux/actions/dataActions'; 
+import { likePodcast, unlikePodcast, getPodcast, deletePodcast } from '../redux/actions/dataActions'; 
 
 //Material-UI
 import withStyles from '@material-ui/core/styles/withStyles';
@@ -25,6 +25,7 @@ import PauseIcon from '@material-ui/icons/Pause';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import Button from '@material-ui/core/Button';
+import DeletePodcast from './DeletePodcast';
 
 const styles = {
   root: {
@@ -109,9 +110,16 @@ class Podcasts extends Component {
       podcast : { 
         podcastId, podcastUrl, podcastName, createdAt, userImage, userHandle, likeCount
       }, 
-      user: { authenticated },
+      user: { 
+        authenticated, 
+        credentials: { handle }
+      },
     } = this.props;
     const { playing } = this.state;
+
+    const deleteButton = authenticated && userHandle === handle ? (
+      <DeletePodcast podcastId={podcastId} />
+    ) : null
 
     return (
       <Card className={classes.root}>
@@ -123,6 +131,8 @@ class Podcasts extends Component {
           <Typography variant="subtitle1" component={Link} to={`/users/${userHandle}`} color="textSecondary">
             @{userHandle}
           </Typography>
+
+          { deleteButton }
           
         </CardContent>
         <div className={classes.controls}>

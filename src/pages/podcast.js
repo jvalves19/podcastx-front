@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types';
-import withStyles from '@material-ui/core/styles/withStyles';
 import themeFile from '../util/theme';
+import withStyles from '@material-ui/core/styles/withStyles';
 
 //Redux
 import { connect } from 'react-redux';
@@ -22,12 +22,14 @@ import Tooltip from '@material-ui/core/Tooltip';
 const styles = (themeFile);
 
 class podcast extends Component { 
-  state = {
-    podcastUrl: '',
-    podcastName: '',
-    errors: {}
-  };
-
+  constructor(){
+    super();
+    this.state = {
+      podcastUrl: '',
+      podcastName: '',
+      errors: {}
+    };
+  }
   componentWillReceiveProps(nextProps){
     if(nextProps.UI.errors){
       this.setState({ errors: nextProps.UI.errors })
@@ -50,60 +52,58 @@ class podcast extends Component {
   }
 
   render() {
-    const { errors } = this.state;
     const { classes, UI: { loading }} = this.props;
+    const { errors } = this.state;
 
     return (
       <Grid>
-        <Fragment>       
-          <DialogTitle> Publique aqui o seu PODEX </DialogTitle>
-          <DialogContent>
-            <form onSubmit={this.handleSubmit}>
-              <TextField 
-                id='podcastUrl'
-                name='podcastUrl'
-                type='text'
-                label='Podex'
-                placeholder='Link do PODCAST'
-                className={classes.textField}
-                helperText={errors.handle}
-                error={errors.handle ? true : false}
-                onChange={this.handleChange}
-                fullWidth 
-              />
-              <TextField 
-                id='podcastName'
-                name='podcastNome'
-                type='text'
-                label='Nome do Podex'
-                placeholder='Nome do PODCAST'
-                className={classes.textField}
-                helperText={errors.handle}
-                error={errors.handle ? true : false}
-                onChange={this.handleChange}
-                fullWidth 
-              />                 
-              <Button 
-                type='submit' 
-                variant='outlined' 
-                color='primary' 
-                className={classes.button} 
-                disabled={loading} 
-              >
-              {errors.general && (
-                <Typography variant='body2' className={classes.customError}>
-                    {errors.general}
-                </Typography>
-              )}
-                <Tooltip title='Insira seu Podcast Aqui' placement='top'>
-                  <AudiotrackIcon />
-                </Tooltip> 
-                Podcastizar
-                {loading && ( <CircularProgress size={30} className={classes.progress} />)}
-              </Button>
-            </form>
-          </DialogContent>
-        </Fragment>
+        <DialogTitle> Publique aqui o seu PODEX </DialogTitle>
+        <DialogContent>
+          <form onSubmit={this.handleSubmit}>
+            <TextField 
+              id='podcastUrl'
+              name='podcastUrl'
+              type='text'
+              label='Podex'
+              placeholder='Link do PODCAST'
+              className={classes.textField}
+              helperText={errors.handle}
+              error={errors.handle ? true : false}
+              onChange={this.handleChange}
+              fullWidth 
+            />
+            <TextField 
+              id='podcastName'
+              name='podcastNome'
+              type='text'
+              label='Nome do Podex'
+              placeholder='Nome do PODCAST'
+              className={classes.textField}
+              helperText={errors.handle}
+              error={errors.handle ? true : false}
+              onChange={this.handleChange}
+              fullWidth 
+            />                 
+            <Button 
+              type='submit' 
+              variant='outlined' 
+              color='primary' 
+              className={classes.button} 
+              disabled={loading} 
+            >
+            {errors.general && (
+              <Typography variant='body2' className={classes.customError}>
+                  {errors.general}
+              </Typography>
+            )}
+              <Tooltip title='Insira seu Podcast Aqui' placement='top'>
+                <AudiotrackIcon />
+              </Tooltip> 
+              Podcastizar
+              {loading && ( <CircularProgress size={30} className={classes.progress} />)}
+            </Button>
+          </form>
+        </DialogContent>
       </Grid>
     )
   }

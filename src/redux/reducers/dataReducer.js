@@ -4,6 +4,7 @@ import {
   LIKE_PODCAST, 
   UNLIKE_PODCAST, 
   LOADING_DATA, 
+  DELETE_PODCAST,
   POST_PODCAST 
 } from "../types";
 
@@ -29,7 +30,7 @@ export default function(state = initialState, action){
     case SET_PODCAST:
       return {
         ...state,
-        podcast: action.payload
+        podcast: action.payload,
       }
     case LIKE_PODCAST:
     case UNLIKE_PODCAST:
@@ -40,6 +41,13 @@ export default function(state = initialState, action){
       }
       return {
         ...state,
+      }
+    case DELETE_PODCAST:
+      window.location.reload()
+      i = state.podcasts.findIndex((podcast) => podcast.podcastId === action.payload);
+      state.podcast.splice(i, 1);
+      return {
+        ...state 
       }
     case POST_PODCAST:
       return {

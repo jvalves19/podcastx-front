@@ -4,6 +4,7 @@ import {
   LOADING_DATA, 
   LIKE_PODCAST, 
   UNLIKE_PODCAST, 
+  DELETE_PODCAST,
   POST_PODCAST,
   LOADING_UI, 
   SET_ERRORS, 
@@ -93,21 +94,33 @@ export const unlikePodcast = (podcastId) => (dispatch) => {
     .catch(err => console.log(err));
 } 
 
+export const deletePodcast = (podcastId) => (dispatch) => {
+  axios
+    .delete(`/podcast/${podcastId}`)
+    .then(() => {
+      dispatch({ 
+        type: DELETE_PODCAST, 
+        payload: podcastId,
+      });      
+    })
+    .catch(err => console.log(err))
+}
+
 export const getUserData = (userHandle) => (dispatch) => {
   dispatch({ type: LOADING_DATA });
   axios
     .get(`/user/${userHandle}`)
     .then(res => {
-      dispatch({ 
-        type: SET_PODCASTS, 
-        payload: res.data.podcasts
-      });      
-    })
-    .catch(() => {
       // dispatch({ 
       //   type: SET_PODCASTS, 
-      //   payload: null 
-      // })
+      //   payload: res.data.podcasts
+      // });      
+    })
+    .catch(() => {
+      dispatch({ 
+        type: SET_PODCASTS, 
+        payload: null 
+      })
     })
 }
 

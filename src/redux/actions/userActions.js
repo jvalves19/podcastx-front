@@ -57,10 +57,10 @@ export const getUserData = () => (dispatch) => {
   dispatch({ type: LOADING_USER });
   axios
     .get('/user')
-    .then(res => {
+    .then((user) => {
       dispatch({
         type: SET_USER,
-        payload: res.data
+        payload: user.data
       })
     })
     .catch(err => console.log(err))
