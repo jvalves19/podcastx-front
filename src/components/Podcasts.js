@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 
 //Redux
 import { connect } from 'react-redux';
-import { likePodcast, unlikePodcast, getPodcast } from '../redux/actions/dataActions'; 
+import { likePodcast, unlikePodcast, getPodcast, deletePodcast } from '../redux/actions/dataActions'; 
 
 //Material-UI
 import withStyles from '@material-ui/core/styles/withStyles';
