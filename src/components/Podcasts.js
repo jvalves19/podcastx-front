@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 
 //Redux
 import { connect } from 'react-redux';
-import { likePodcast, unlikePodcast, getPodcast, deletePodcast } from '../redux/actions/dataActions'; 
+import { likePodcast, unlikePodcast, getPodcast } from '../redux/actions/dataActions'; 
 
 //Material-UI
 import withStyles from '@material-ui/core/styles/withStyles';
@@ -61,65 +61,75 @@ const styles = {
   }  
 }
  
-class Podcasts extends Component {
+class Podcasts extends Component {  
   constructor(){
     super();    
     this.state = {
       playing: false,
-    };
-    this.audio = new Audio(
-      'https://firebasestorage.googleapis.com/v0/b/podcastx-tcc.appspot.com/o/Cornerstone.mp3?alt=media'
-    )
+    }; 
   }
 
-  soundPlay = () => {
-    this.setState({
-      playing: true
-    })
-    //this.props.getPodcast(this.props.podcastId)
-    this.audio.play();
-  }
-
-  soundStop = () => {
-    this.setState({
-      playing: false
-    });
-    this.audio.pause();  
+  soundPlayPause = () => {
+    if (!this.state.playing){
+      this.setState({
+        playing: true
+      });      
+      this.audio.play();
+    } else {
+      this.setState({
+        playing: false
+      });
+      this.audio.pause();
+    }
   }
 
   likedPodcast = () => {
-    if(this.props.user.likes && this.props.user.likes.find(like => like.podcastId === this.props.podcast.podcastId)){
+    if (
+      this.props.user.likes &&
+      this.props.user.likes.find(like => like.podcastId === this.props.podcast.podcastId)
+    ) {
       return true;
     }
     else { 
       return false;
     }
   };
-
   likePodcast = () => {
     this.props.likePodcast(this.props.podcast.podcastId);
-  }
+  };
   unlikePodcast = () => {
     this.props.unlikePodcast(this.props.podcast.podcastId);
-  }
+  };
+
   render() {
     dayjs.extend(relativeTime);
 
+    const { playing } = this.state;
     const { 
       classes, 
-      podcast : { 
-        podcastId, podcastUrl, podcastName, createdAt, userImage, userHandle, likeCount
+      podcast: { 
+        podcastId, 
+        //podcastUrl, 
+        podcastName, 
+        createdAt, 
+        userImage, 
+        userHandle, 
+        likeCount
       }, 
       user: { 
         authenticated, 
         credentials: { handle }
       },
     } = this.props;
-    const { playing } = this.state;
-
+    //Delete Button - If authenticated this will appear
     const deleteButton = authenticated && userHandle === handle ? (
       <DeletePodcast podcastId={podcastId} />
     ) : null
+
+    //
+    this.audio = new Audio(
+      this.props.podcast.podcastUrl
+    );
 
     return (
       <Card className={classes.root}>
@@ -141,11 +151,11 @@ class Podcasts extends Component {
           </IconButton>
 
             { playing ? 
-              <IconButton aria-label="play/pause" onClick={() => this.soundStop()}>
+              <IconButton aria-label="play/pause" onClick={this.soundPlayPause}>
                 <PauseIcon />
               </IconButton> 
-                : 
-              <IconButton aria-label="play/pause" onClick={() => this.soundPlay()}>
+              :
+              <IconButton aria-label="play/pause" onClick={this.soundPlayPause}>
                 <PlayArrowIcon />
               </IconButton> 
             }  
@@ -192,7 +202,6 @@ class Podcasts extends Component {
 }
 
 Podcasts.propTypes = {
-  //podcastId: PropTypes.string.isRequired,
   getPodcast: PropTypes.func.isRequired,
   likePodcast: PropTypes.func.isRequired,
   unlikePodcast: PropTypes.func.isRequired,

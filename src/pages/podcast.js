@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types';
 import themeFile from '../util/theme';
 import withStyles from '@material-ui/core/styles/withStyles';
@@ -43,6 +43,7 @@ class podcast extends Component {
       podcastUrl: this.state.podcastUrl,
       podcastName: this.state.podcastName
     };
+    console.log(newPodcast);
     this.props.postPodcast(newPodcast, this.props.history);
   };
   handleChange = (event) => {
@@ -74,7 +75,7 @@ class podcast extends Component {
             />
             <TextField 
               id='podcastName'
-              name='podcastNome'
+              name='podcastName'
               type='text'
               label='Nome do Podex'
               placeholder='Nome do PODCAST'
