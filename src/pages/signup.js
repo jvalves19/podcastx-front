@@ -1,6 +1,9 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types';
+import "../css/formularioSL.css";
 import themeFile from '../util/theme';
+//import { FaFacebook } from 'react-icons/fa';
+//import { FcGoogle } from 'react-icons/fc';
 
 //Redux
 import { connect } from 'react-redux';
@@ -8,15 +11,11 @@ import { signupUser } from '../redux/actions/userActions';
 
 //Material-UI
 import withStyles from '@material-ui/core/styles/withStyles';
-import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
-
 import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
 import CircularProgress from '@material-ui/core/CircularProgress';
 
 const styles = (themeFile);
-
 class signup extends Component {
     constructor(){
         super();
@@ -59,14 +58,15 @@ class signup extends Component {
         const { errors } = this.state;
 
         return (
-            <Grid container className={classes.form}>
-                <Grid item sm />
-                <Grid item sm > 
-                    <Typography variant='h2' className={classes.pageTitle}>
+            <div className="page"> 
+                <form className="formulario" noValidate onSubmit={this.handleSubmit}>
+                    <fieldset className="campoForm">
+                    <h4 className="legenda">
                         Cadastre-se
-                    </Typography>
-                    <form noValidate onSubmit={this.handleSubmit}>
+                    </h4>
+                    <div className="inputs">
                         <TextField 
+                            variant="outlined"
                             id='handle' 
                             name='handle' 
                             type='text' 
@@ -79,6 +79,7 @@ class signup extends Component {
                             fullWidth
                         />
                         <TextField 
+                            variant="outlined"
                             id='email' 
                             name='email' 
                             type='email' 
@@ -91,6 +92,7 @@ class signup extends Component {
                             fullWidth
                         />
                         <TextField 
+                            variant="outlined"
                             id='password' 
                             name='password' 
                             type='password' 
@@ -103,6 +105,7 @@ class signup extends Component {
                             fullWidth
                         />
                         <TextField 
+                            variant="outlined"
                             id='confirmPassword' 
                             name='confirmPassword' 
                             type='password' 
@@ -119,16 +122,16 @@ class signup extends Component {
                                 {errors.general}
                             </Typography>
                         )}
-                        <Button type='submit' variant='outlined' color='primary' className={classes.button} disabled={loading}>
+                        <button type='submit' className="BSubmit" disabled={loading}>
                             Cadastre-se
                             {loading && (
-                                <CircularProgress size={30} className={classes.progress} />
+                                <CircularProgress size={40} className={classes.progress} />
                             )}
-                        </Button>
-                    </form>
-                </Grid>
-                <Grid item sm />
-            </Grid>
+                        </button>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
         )
     }
 }

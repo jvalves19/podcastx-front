@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types';
+import '../css/home.css';
 
 //Redux
 import { connect } from 'react-redux';
@@ -23,14 +24,16 @@ class home extends Component {
         ) : (<p> Carregando ... </p>);
 
         return (
-             <Grid container>
-                 <Grid item sm={5} xs={12}>
-                    {recentePodcastsMarkup}
-                 </Grid>
-                 <Grid item sm={5} xs={8}>
-                    <p> Categorias ... </p>
-                 </Grid>
-             </Grid>
+            <section className="banner">
+                <Grid container>
+                    <Grid item sm={5} xs={12}>
+                        <p> Categorias ... </p>
+                    </Grid>
+                    <Grid item sm={5} xs={4}>
+                        {recentePodcastsMarkup}
+                    </Grid>
+                </Grid>
+            </section>
         );
     }
 }

@@ -40,6 +40,7 @@ export default {
       marginTop: 10
   },
   progress: {
-      position: 'absolute',
+      position: 'relative',
+      padding: 'auto',
   }
 };

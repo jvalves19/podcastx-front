@@ -2,69 +2,61 @@
   --menu-itens-hover: #b1babe;
 
   /*Cores principais*/
-  --main-color: #474073;
-  --second-color: #2e4159;
-  --third-color: #4f4d8c;
-  --fourth-color: #3f3f3f;
-  --fifith-color: #8f8ebf;
+  --main-color: #115d8c;
+  --second-color: #0396a6;
+  --third-color: #6085a6;
+  --fourth-color: #05dbf2;
+  --fifith-color: #f0f2f2;
 
   /*Dark version*/
-  --main-color-dark: #1b1947;
-  --secondary-color-dark: #031b30;
-  --third-color-dark: #20255e;
-  --fourth-color-dark: #191919;
-  --fifith-color-dark: #60618f;
+  --main-color-dark: #00345e;
+  --secondary-color-dark: #006877;
+  --third-color-dark: #315877;
+  --fourth-color-dark: #00a9bf;
+  --fifith-color-dark: #bebfbf;
+  --black-piano: #010b02;
 
   /*X-Dark version*/
-  --main-color-xdark: #000021;
-  --secondary-color-xdark: #010b02;
-  --third-color-xdark: #000034;
-  --fourth-color-xdark: #000000;
-  --fifith-color-xdark: #343761;
+  --main-color-xdark: #000d34;
+  --secondary-color-xdark: #003d4b;
+  --third-color-xdark: #002f4b;
+  --fourth-color-xdark: #007a8f;
+  --fifith-color-xdark: #8e8f8f;
 
   /*light version*/
-  --main-color-light: #746ba2;
-  --secondary-color-light: #596c86;
-  --third-color-light: #7e79bc;
-  --fourth-color-light: #6a6a6a;
-  --fifith-color-light: #cccaff;
+  --main-color-light: #508abc;
+  --secondary-color-light: #56c7d7;
+  --third-color-light: #90b5d8;
+  --fourth-color-light: #6cffff;
+  --fifith-color-light: #ffffff;
 
   /*X-light version*/
-  --main-color-xlight: #a499d3;
-  --secondary-color-xlight: #879ab6;
-  --third-color-xlight: #afa8ef;
-  --fourth-color-xlight: #989898;
-  --fifith-color-xlight: #eae6ff;
+  --main-color-xlight: #83baef;
+  --secondary-color-xlight: #8dfaff;
+  --third-color-xlight: #c2e7ff;
+  --fourth-color-xlight: #a6ffff;
+  --fifith-color-xlight: #ffffff;
 
-  /*Transparencia 90%*/
-  --main-color-transparent-90: #4740731a;
-  --second-color-transparent-90: #2d40581a;
-  --third-color-transparent-90: #504e8d1a;
-  --fourth-color-transparent-90: #4040401a;
-  --fifith-color-transparent-90: #8e8dbf1a;
+  /* Transparencia 25% */
+  --main-color-transp-25: rgba(17, 93, 140, 0.25);
+  --second-color-transp-25: rgba(3, 150, 166, 0.25);
+  --third-color-transp-25: rgba(96, 133, 166, 0.25);
+  --fourth-color-transp-25: rgba(5, 219, 242, 0.25);
+  --fifith-color-transp-25: rgba(240, 242, 242, 0.25);
 
-  /*Transparencia 60%*/
-  --main-color-transparent-60: #47407366;
-  --second-color-transparent-60: #2e415966;
-  --third-color-transparent-60: #4f4d8c66;
-  --fourth-color-transparent-60: #3f3f3f66;
-  --fifith-color-transparent-60: #8f8ebf66;
+  /* Transparencia 50% */
+  --main-color-transp-50: rgba(17, 93, 140, 0.5);
+  --second-color-transp-50: rgba(3, 150, 166, 0.5);
+  --third-color-transp-50: rgba(96, 133, 166, 0.5);
+  --fourth-color-transp-50: rgba(5, 219, 242, 0.5);
+  --fifith-color-transp-50: rgba(240, 242, 242, 0.5);
 
-  /*Transparencia 30%*/
-  --main-color-transparent-30: #474073b3;
-  --second-color-transparent-30: #2e4159b3;
-  --third-color-transparent-30: #4f4d8cb3;
-  --fourth-color-transparent-30: #3f3f3fb3;
-  --fifith-color-transparent-30: #8f8ebfb3;
-
-  /*Transparencia 10%*/
-  --main-color-transparent-10: #474073e6;
-  --second-color-transparent-10: #2e4159e6;
-  --third-color-transparent-10: #4f4d8ce6;
-  --fourth-color-transparent-10: #3f3f3fe6;
-  --fifith-color-transparent-10: #8f8ebfe6;
-
-  --fifith-color-xlight-transp: #eae6ffa6;
+  /* Transparencia 75% */
+  --main-color-transp-75: rgba(17, 93, 140, 0.75);
+  --second-color-transp-75: rgba(3, 150, 166, 0.75);
+  --third-color-transp-75: rgba(96, 133, 166, 0.75);
+  --fourth-color-transp-75: rgba(5, 219, 242, 0.75);
+  --fifith-color-transp-75: rgba(240, 242, 242, 0.75);
 }
 
 body {
